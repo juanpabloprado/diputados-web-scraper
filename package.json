@@ -1,0 +1,20 @@
+{
+  "name": "diputados-web-scrape",
+  "version": "0.0.1",
+  "description": "Scrape le diputado.",
+  "main": "server.js",
+  "author": "Bean Creations",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gfosco/skipcodes.git"
+  },
+  "dependencies": {
+    "cheerio": "^0.19.0",
+    "express": "^4.13.3",
+    "request": "^2.61.0"
+  },
+  "license": "MIT"
+}
