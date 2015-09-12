@@ -4,6 +4,10 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app = express();
 
+var Parse = require('parse/node');
+
+Parse.initialize("yNNYWc4bNyk1okUlCQfO81QJ2r0WQk78MieWtJuS", "tHr3JKcmhxVLTClvUQ9LOjxxvfx99zA3Pb1HkEl4");
+
 app.get('/scrape', function (req, res) {
 	// Let's scrape diputados
 	url = 'http://sitl.diputados.gob.mx/LXII_leg/listado_diputados_gpnp.php';
@@ -79,6 +83,12 @@ app.get('/scrape', function (req, res) {
 
 		fs.writeFile('output.json', JSON.stringify(diputados, null, 4), function (err) {
 			console.log('File successfully written! - Check your project directory for the output.json file');
+		});
+
+		var TestObject = Parse.Object.extend("TestObject");
+		var testObject = new TestObject();
+		testObject.save({foo: "bar"}).then(function(object) {
+			console.log("yay! it worked");
 		});
 
 		res.send('Check your console!')
