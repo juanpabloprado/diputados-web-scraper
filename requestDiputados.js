@@ -70,6 +70,10 @@ function requestDiputados(url) {
 									console.log("PANAL " + imgSrc);
 									party = "PANAL";
 								}
+								if (imgSrc === 'images/LogoMorena.jpg') {
+									console.log("Morena " + imgSrc);
+									party = "MORENA";
+								}
 							}
 
 							var uri = $(this).find("a").attr('href');

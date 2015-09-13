@@ -1,8 +1,8 @@
 var request = require('request');
 var cheerio = require('cheerio');
-var fs = require('fs');
+var Parse = require('parse/node');
+var Diputado = require('./diputado');
 
-   
 function  asistencias(idDip ,id ,json){
 
 
@@ -38,6 +38,16 @@ function  asistencias(idDip ,id ,json){
 		}
 
 		json.asistencias = asistencias;
+
+
+		// Create a new instance of Blog
+		diputado = new Diputado();
+		// Call .create()
+		diputado.create(json.number, json.name, json.party,
+			json.cabezera, json.circunscripcion, json.correo,
+			json.curul, json.entidad, json.tipoEleccion,
+			json.academicos, json.asistencias);
+
 	});
 }
    

@@ -38,15 +38,7 @@ function datosDiputado(id, json){
 		if(!error){
 			var $ = cheerio.load(html);
 
-			var dato={
-			  		TipoEleccion:"",
-			  		Entidad:"",
-			  		Circunscripcion:"",
-			  		Cabecera:"",
-			  		Curul:"",
-			  		Correo:"",
-			  		datos:{}};
-			var  academicos=[];  		
+			var  academicos=[];
 			$('table').find('table').each(function(i, elem) {				  
 				var dato1={};
 			  	$(this).find('tr').each(function(z, elem) {
@@ -63,12 +55,12 @@ function datosDiputado(id, json){
 					}							  			
 			  		
 			  	});
-			  	json.TipoEleccion=dato1[1];
-			  	json.Entidad=dato1[2];
-			  	json.Circunscripcion=dato1[3];
-			  	json.Cabecera=dato1[4];
-			  	json.Curul=dato1[5];
-			  	json.Correo=dato1[8];
+			  	json.tipoEleccion = dato1[1];
+			  	json.entidad = dato1[2];
+			  	json.circunscripcion = dato1[3];
+			  	json.cabecera = dato1[4];
+			  	json.curul = dato1[5];
+			  	json.correo = dato1[8];
 			  	
 			});
 			
@@ -102,11 +94,11 @@ function datosDiputado(id, json){
 								esc.tiempo=jsonTemp[2];
 								academicos.push(esc);
 								cont++;
-							
-																												
+
+
 						}
-											
-						
+
+
 				});
 			});
 
