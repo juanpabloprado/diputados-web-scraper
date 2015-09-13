@@ -44,9 +44,9 @@ function  asistencias(idDip,id,dato){
 			});				        
 		}
 		datoDiputado.asistencia=meses;
-	 //fs.writeFile('output.html', JSON.stringify(datoDiputado, null, 4), function(err){
-      //  	console.log('File successfully written! - Check your project directory for the output.html file');
-      //});
+	 fs.writeFile('output.html', JSON.stringify(datoDiputado, null, 4), function(err){
+        	console.log('File successfully written! - Check your project directory for the output.html file');
+      });
 	});
 }
    

@@ -46,13 +46,7 @@ function datosDiputado(id, json){
 			  		Curul:"",
 			  		Correo:"",
 			  		datos:{}};
-			var  academicos= { 
-					escolaridad : {}, 
-					trayectoriaPol : {}, 
-					experienciaLeg : {},
-					admPublicaFed:{},
-					asoc:{},
-					cargoLeg:{}};  		
+			var  academicos=[];  		
 			$('table').find('table').each(function(i, elem) {				  
 				var dato1={};
 			  	$(this).find('tr').each(function(z, elem) {
@@ -80,9 +74,12 @@ function datosDiputado(id, json){
 			
 			$('table').next().children().each(function(i, elem) {
 				var contGrup=0;var cont=0;
+				var titulo='';
+				//var acaTemp={};
 				$(this).find('tr').each(function(z, elem) {
 					var jsonTemp= {};
 					var num=0;
+					var esc={};
 					
 					$(this).find('td').each(function(y, elem) {
 						var texto=$(this).text();
@@ -90,45 +87,35 @@ function datosDiputado(id, json){
 						num=num+1;
 					});
 						
-						if(num==1){								
+						if(num==1){	
+							//academicos[cont]=esc;							
 							contGrup++;
-							cont=0;
+							
+							titulo=jsonTemp[0];
+							
 						}else{
 							
-							if(contGrup==1){
-								academicos.escolaridad[cont]=jsonTemp[0]+":"+jsonTemp[1];
+							
+								esc.grupo=titulo;
+								esc.concepto=jsonTemp[0];
+								esc.descripcion=jsonTemp[1];
+								esc.tiempo=jsonTemp[2];
+								academicos.push(esc);
 								cont++;
-							}
-							if(contGrup==2){
-								academicos.trayectoriaPol[cont]=jsonTemp[0]+":"+jsonTemp[1]+":"+jsonTemp[2];
-								cont++;
-							}	
-							if(contGrup==3){
-								academicos.experienciaLeg[cont]=jsonTemp[0]+":"+jsonTemp[1]+":"+jsonTemp[2];
-								cont++;
-							}
-							if(contGrup==4){
-								academicos.admPublicaFed[cont]=jsonTemp[0]+":"+jsonTemp[1]+":"+jsonTemp[2];
-								cont++;
-							}
-							if(contGrup==5){
-								academicos.asoc[cont]=jsonTemp[0]+":"+jsonTemp[1]+":"+jsonTemp[2];
-								cont++;
-							}
-							if(contGrup==6){
-								academicos.cargoLeg[cont]=jsonTemp[0]+":"+jsonTemp[1]+":"+jsonTemp[2];
-								cont++;
-							}																														
+							
+																												
 						}
 											
 						
 				});
 			});
+
 			json.academicos = academicos;
 
 			var ultimoPeriodo = 11;
 			asistencias(id, ultimoPeriodo, json);
 		}
+
 	});
 }
 
