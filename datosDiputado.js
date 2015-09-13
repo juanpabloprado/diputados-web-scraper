@@ -37,9 +37,22 @@ function datosDiputado(id, json){
 	request(url, function(error, response, html){
 		if(!error){
 			var $ = cheerio.load(html);
-
+			var view=[];
 			var  academicos=[];
-			$('table').find('table').each(function(i, elem) {				  
+
+
+				$('img').each(function(i, elem) {
+					
+					view[i]=$(this).attr("src");
+				});
+				var foto=view[1];
+				foto=foto.split(".");
+				foto=foto[1];
+				foto='http://sitl.diputados.gob.mx/LXII_leg/'+foto;
+				json.foto=foto;
+
+			$('table').find('table').each(function(i, elem) {
+				
 				var dato1={};
 			  	$(this).find('tr').each(function(z, elem) {
 			  		var jsonTemp={};
@@ -107,6 +120,7 @@ function datosDiputado(id, json){
 			var ultimoPeriodo = 11;
 			asistencias(id, ultimoPeriodo, json);
 		}
+
 
 	});
 }
