@@ -4,6 +4,8 @@ var cheerio = require('cheerio');
 var Parse = require('parse/node');
 var Diputado = require('./diputado');
 
+var datosDiputado = require('./datosDiputado');
+
 function limpiar(text){
 	var text = text.toLowerCase(); // a minusculas
 	text = text.replace(/[бадве]/, 'a');
@@ -77,10 +79,12 @@ function requestDiputados(url) {
 								json.number = id;
 								json.name = limpiar(name);
 								json.party = party;
-								// Create a new instance of Blog
-								var diputado = new Diputado();
-								// Call .create()
-								diputado.create(json.number, json.name, json.party);
+								//// Create a new instance of Blog
+								//var diputado = new Diputado();
+								//// Call .create()
+								//diputado.create(json.number, json.name, json.party);
+
+								datosDiputado(id, json);
 							}
 						})
 					}

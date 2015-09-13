@@ -1,7 +1,7 @@
 var request = require('request');
 var cheerio = require('cheerio');
 var fs = require('fs');
-var asistencias=require('./asistencias');
+var asistencias = require('./asistencias');
 
 			function limpiar(text){
 			      var text = text; // a minusculas
@@ -31,19 +31,13 @@ var asistencias=require('./asistencias');
 			      return text;
 			   } 
 
-function datosDiputado(id){
+function datosDiputado(id, json){
 	url='http://sitl.diputados.gob.mx/LXII_leg/curricula.php?dipt='+id;
 
 	request(url, function(error, response, html){
 		if(!error){
 			var $ = cheerio.load(html);
 
-			var title, release, rating;
-			var json = { title : "", release : "", rating : ""};
-			var vista='';
-			var tabla=$('table').html();
-			var numTables="";
-			var tablas={};
 			var dato={
 			  		TipoEleccion:"",
 			  		Entidad:"",
@@ -75,15 +69,12 @@ function datosDiputado(id){
 					}							  			
 			  		
 			  	});
-			  	//console.log(dato1)
-			  	dato.TipoEleccion=dato1[1];
-			  	dato.Entidad=dato1[2];
-			  	dato.Circunscripcion=dato1[3];
-			  	dato.Cabecera=dato1[4];
-			  	dato.Curul=dato1[5];
-			  	dato.Correo=dato1[8];
-			  	//console.log(dato);
-			  	
+			  	json.TipoEleccion=dato1[1];
+			  	json.Entidad=dato1[2];
+			  	json.Circunscripcion=dato1[3];
+			  	json.Cabecera=dato1[4];
+			  	json.Curul=dato1[5];
+			  	json.Correo=dato1[8];
 			  	
 			});
 			
@@ -98,11 +89,9 @@ function datosDiputado(id){
 						jsonTemp[y]=limpiar1(texto);
 						num=num+1;
 					});
-						//console.log(jsonTemp);
 						
 						if(num==1){								
 							contGrup++;
-							console.log("separador : "+contGrup);
 							cont=0;
 						}else{
 							
@@ -135,8 +124,10 @@ function datosDiputado(id){
 						
 				});
 			});
-			dato.datos=academicos;
-			asistencias(430,11,dato);        
+			json.academicos = academicos;
+
+			var ultimoPeriodo = 11;
+			asistencias(id, ultimoPeriodo, json);
 		}
 	});
 }

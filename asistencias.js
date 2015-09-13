@@ -22,14 +22,14 @@ function  asistencias(idDip,id,dato){
 				var json = { mes : "", dias :""};
 				var titulo=$(this).find('.TitulosVerde').html();
 				if(titulo!=null){
-					console.log(titulo);
+					//console.log(titulo);
 					json.mes=titulo;	
 					var contDias=0;
 					var jsonTemp=[];
 					$(this).find("td [bgcolor='#D6E2E2']").each(function(i, elem) {
 						var datos=$(this).find("font").html();
 						datos=datos.split("<br>");
-						console.log(datos);
+						//console.log(datos);
 						var dia={dia:datos[0],concepto:datos[1]};
 						jsonTemp[contDias]=dia;
 						contDias++;
@@ -44,9 +44,9 @@ function  asistencias(idDip,id,dato){
 			});				        
 		}
 		datoDiputado.asistencia=meses;
-	 fs.writeFile('output.html', JSON.stringify(datoDiputado, null, 4), function(err){
-        	console.log('File successfully written! - Check your project directory for the output.html file');
-      });
+	 //fs.writeFile('output.html', JSON.stringify(datoDiputado, null, 4), function(err){
+      //  	console.log('File successfully written! - Check your project directory for the output.html file');
+      //});
 	});
 }
    
